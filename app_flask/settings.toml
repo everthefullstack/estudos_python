@@ -1,0 +1,35 @@
+[default]
+    TITLE = "APP FLASK PYTHON"
+    SEND_FILE_MAX_AGE_DEFAULT = 0
+    ORM = "peewee"
+    ENV = "development"
+    DEBUG = 1
+    CONFIGURATIONS = [
+        "EXTENSIONS",
+        "SETTINGS",
+        #"BLUEPRINTS_API"
+    ]
+    EXTENSIONS = [
+        "app.configurations.extensions.cors",
+    ]
+    SETTINGS = [
+        "app.configurations.settings.database",
+        "app.configurations.settings.peewee",
+    ]
+    #BLUEPRINTS_API = ["app.blueprints.api]
+
+[development]
+    DATABASE_SOLUTION = "sqlite3"
+    DATABASE_URI = "sqlite:///"
+    DATABASE_NAME = "app_flask"
+    DATABASE_SCHEMA = ""
+    DATABASE_OPTIONS = ""
+    DATABASE_PATH = "./arq/database/"
+
+[production]
+    DATABASE_SOLUTION = "postgresql"
+    DATABASE_URI = "postgresql://app_flask:app_flask@localhost:5433/"
+    DATABASE_NAME = "app_flask"
+    DATABASE_SCHEMA = "app_flask_prod"
+    DATABASE_OPTIONS = "?options=--search_path%3"
+    DATABASE_PATH = ""
