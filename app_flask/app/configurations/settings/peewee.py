@@ -1,6 +1,6 @@
 from flask import Flask
 from playhouse.postgres_ext import PostgresqlExtDatabase, SqliteDatabase
-from app.models.peewee.base_model import database_proxy
+from app.models.peewee.base_model import BaseModel
 from app.configurations.settings import AbcDatabase
 
 
@@ -13,10 +13,10 @@ class Peewee(AbcDatabase):
         self.__database_env = app.config.ENV
         self.__database_options = app.config.DATABASE_OPTIONS
 
-    def __config_db_context(self):
+    def __config_db_connection(self):
         match self.__database_env:
             case "production":
-                database_proxy.initialize(PostgresqlExtDatabase(f"""{self._database_uri}
+                BaseModel._meta.database.initialize(PostgresqlExtDatabase(f"""{self._database_uri}
                                                               {self._database_name}
                                                               {self.__database_options}
                                                               {self._database_schema}""", 
@@ -25,10 +25,10 @@ class Peewee(AbcDatabase):
                                                                autorollback=True))
 
             case "development":
-                database_proxy.initialize(SqliteDatabase(f"{self._database_path}/{self._database_name}.db", pragmas={'foreign_keys': 1}))
+                BaseModel._meta.database.initialize(SqliteDatabase(f"{self._database_path}/{self._database_name}.db", pragmas={'foreign_keys': 1}))
                 
     def init_app(self):
-        self.__config_db_context()
+        self.__config_db_connection()
 
 def init_app(app: Flask) -> None:
     Peewee(app).init_app()
