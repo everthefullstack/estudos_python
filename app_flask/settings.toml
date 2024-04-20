@@ -6,15 +6,15 @@
     DEBUG = 1
     CONFIGURATIONS = [
         "EXTENSIONS",
-        "SETTINGS",
+        "DATABASE",
         #"BLUEPRINTS_API"
     ]
     EXTENSIONS = [
         "app.configurations.extensions.cors",
     ]
-    SETTINGS = [
-        "app.configurations.settings.database",
-        "app.configurations.settings.peewee",
+    DATABASE = [
+        "app.configurations.database.settings",
+        "app.configurations.database.peewee",
     ]
     #BLUEPRINTS_API = ["app.blueprints.api]
 

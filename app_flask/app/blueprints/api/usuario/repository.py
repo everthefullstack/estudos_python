@@ -1,0 +1,2 @@
+class UsuarioRepository:
+    pass

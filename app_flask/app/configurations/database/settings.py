@@ -3,10 +3,10 @@ import sqlite3 as sql
 import os
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 from flask import Flask
-from app.configurations.settings import AbcDatabase
+from app.configurations.database import AbcDatabase
 
 
-class Database(AbcDatabase):
+class Settings(AbcDatabase):
 
     __slots__ = ("__database_solution",)
 
@@ -87,4 +87,4 @@ class Database(AbcDatabase):
         self.__config_database()
 
 def init_app(app: Flask):
-    Database(app).init_app()
+    Settings(app).init_app()

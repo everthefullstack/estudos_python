@@ -1,7 +1,7 @@
 from flask import Flask
 from playhouse.postgres_ext import PostgresqlExtDatabase, SqliteDatabase
 from app.models.peewee.base_model import BaseModel
-from app.configurations.settings import AbcDatabase
+from app.configurations.database import AbcDatabase
 
 
 class Peewee(AbcDatabase):
