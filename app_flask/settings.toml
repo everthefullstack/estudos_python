@@ -6,15 +6,15 @@
     DEBUG = 1
     CONFIGURATIONS = [
         "EXTENSIONS",
-        "DATABASE",
+        "DB",
         #"BLUEPRINTS_API"
     ]
     EXTENSIONS = [
         "app.configurations.extensions.cors",
     ]
-    DATABASE = [
+    DB = [
         "app.configurations.database.settings",
-        "app.configurations.database.peewee",
+        "app.configurations.database.database",
     ]
     #BLUEPRINTS_API = ["app.blueprints.api]
 
@@ -24,7 +24,7 @@
     DATABASE_NAME = "app_flask"
     DATABASE_SCHEMA = ""
     DATABASE_OPTIONS = ""
-    DATABASE_PATH = "./arq/database/"
+    DATABASE_PATH = "arq/database/"
 
 [production]
     DATABASE_SOLUTION = "postgresql"

@@ -1,26 +1,41 @@
+from flask import Flask
 from app.models.peewee.usuario_model import UsuarioModel
+from app.models.sqlalchemy.base_model import db as sqlalchemy
+from app.models.peewee.base_model import db as peewee
 
 
-class Tables:
+class TablesPeewee:
     
     def __create_tables(self):
-        
-        tables = [UsuarioModel,]
-        
-        for table in tables:
-            try:
-                if table.table_exists():
-                    print(f"Tabela {table._meta.table_name} já existe, não será criada.")
-                    
-                else:
-                    table.create_table(safe=True)
-                    print(f"Tabela {table._meta.table_name} criada com sucesso!")
+        try:
+            tables = [UsuarioModel,]
+            peewee.database.create_tables(tables)
 
-            except Exception as error:
-                print(f"Erro ao criar tabela => {error}")
+        except Exception as error:
+            print(f"Erro ao criar tabela => {error}")
                 
     def process(self):
         self.__create_tables()
 
-def process():
-    Tables().process()
+class TablesSqlalchemy:
+    
+    def __create_tables(self):
+        try:
+            sqlalchemy.metadata.create_all()
+
+        except Exception as error:
+                print(f"Erro ao criar tabela => {error}")
+
+    def process(self):
+        self.__create_tables()
+
+def init_app(app: Flask):
+
+    match app.config.ORM:
+        case "peewee":
+            TablesPeewee().process()
+        
+        case "sqlalchemy":
+            TablesSqlalchemy().process()
+
+    
