@@ -40,6 +40,7 @@ class SettingsInterface(ABC):
 # atuando como classe base, fornecendo implementações comuns que serão
 # compartilhadas para todas as subclasses concretas
 class SettingsBase(SettingsInterface):
+
     __slots__ = ("_database_uri", "_database_name", 
                  "_database_schema", "_database_path")
     
@@ -60,6 +61,7 @@ class ConnectionInterface(ABC):
 # atuando como classe base, fornecendo implementações comuns que serão
 # compartilhadas para todas as subclasses concretas
 class ConnectionBase(ConnectionInterface):
+    
     __slots__ = ("_database_uri", "_database_name",)
     
     def __init__(self, app: Flask) -> None:

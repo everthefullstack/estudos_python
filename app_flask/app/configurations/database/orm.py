@@ -23,7 +23,7 @@ class Orm:
         self._database_env = app.config.ENV
 
     def process(self):
-
+        
         match self._database_env:
                 case "production":
                     return Postgresql(self.app).create_db_connection()
