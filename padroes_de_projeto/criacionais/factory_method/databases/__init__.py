@@ -1,3 +1,3 @@
 from .database import Database
-from .postgersql import Postgresql
+from .postgresql import Postgresql
 from .sqlite import Sqlite
