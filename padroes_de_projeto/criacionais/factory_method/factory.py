@@ -13,7 +13,7 @@ class IDatabaseFactory(ABC):
         ...
     
     @abstractmethod
-    def process(self):
+    def process(self, database: str) -> Union[databases.Database, ValueError]:
         ...
 
 # fábrica para retornar objetos derivados da subclasse Database
@@ -44,7 +44,6 @@ class DatabaseFactory(IDatabaseFactory):
     def process(self, database: str) -> Union[databases.Database, ValueError]:
 
         if database.upper() in self.database_implementations:
-
             # os parenteses servem para mandar a classe já instanciada como resposta
             return self.database_implementations[database.upper()]()
         else:
