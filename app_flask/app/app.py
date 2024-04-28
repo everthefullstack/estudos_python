@@ -1,7 +1,5 @@
 from flask import Flask
-from app import configurations
-from app.configurations.extensions import manager
-from app.operations import tables
+from app import manager, configurations, tables
 
 
 def create_app() -> Flask:

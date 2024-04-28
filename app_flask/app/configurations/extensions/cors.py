@@ -3,4 +3,4 @@ from flask import Flask
 
 
 def init_app(app: Flask) -> None:
-    CORS(app)
+    CORS().init_app(app)

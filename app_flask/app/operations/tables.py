@@ -38,4 +38,4 @@ def init_app(app: Flask):
         case "sqlalchemy":
             TablesSqlalchemy().process()
 
-    
+    print(f"Tabelas do orm {app.config.ORM} criadas com sucesso.")

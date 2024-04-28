@@ -3,9 +3,57 @@ import sqlite3 as sql
 import os
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 from flask import Flask
-from app.configurations.database import SettingsBase
 from pathlib import Path
+from abc import ABC, abstractmethod
 
+
+class ISettings(ABC):
+    
+    @abstractmethod
+    def _get_cursor_sql_postgres(self) -> None:
+        pass
+
+    @abstractmethod
+    def _create_database_postgres(self) -> None:
+        pass
+
+    @abstractmethod
+    def _create_schema_postgres(self) -> None:
+        pass
+
+    @abstractmethod
+    def _create_postgres(self) -> None:
+        pass
+
+    @abstractmethod
+    def _create_dir_sqlite(self) -> None:
+        pass
+
+    @abstractmethod
+    def _create_database_sqlite(self) -> None:
+        pass
+
+    @abstractmethod
+    def _create_sqlite(self) -> None:
+        pass
+
+    @abstractmethod
+    def _config_database(self) -> None:
+        pass
+
+# classe que utiliza o conceito de herança de implementação,
+# atuando como classe base, fornecendo implementações comuns que serão
+# compartilhadas para todas as subclasses concretas
+class SettingsBase(ISettings):
+
+    __slots__ = ("_database_uri", "_database_name", 
+                 "_database_schema", "_database_path")
+    
+    def __init__(self, app: Flask) -> None:
+        self._database_uri = app.config.DATABASE_URI
+        self._database_name = app.config.DATABASE_NAME
+        self._database_schema = app.config.DATABASE_SCHEMA
+        self._database_path = app.config.DATABASE_PATH
 
 class Settings(SettingsBase):
 
@@ -78,7 +126,7 @@ class Settings(SettingsBase):
             case "postgresql":
                 self._create_postgres()
 
-            case "sqlite3":
+            case "sqlite":
                 self._create_sqlite()
 
             case _:

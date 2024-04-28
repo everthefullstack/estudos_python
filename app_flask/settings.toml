@@ -3,7 +3,7 @@
     SEND_FILE_MAX_AGE_DEFAULT = 0
     ORM = "peewee"
     ENV = "development"
-    DEBUG = 1
+    DEBUG = 0
     CONFIGURATIONS = [
         "EXTENSIONS",
         "DB",
@@ -14,12 +14,13 @@
     ]
     DB = [
         "app.configurations.database.settings",
-        "app.configurations.database.database",
+        "app.configurations.database.uri",
+        "app.configurations.database.orm",
     ]
     #BLUEPRINTS_API = ["app.blueprints.api]
 
 [development]
-    DATABASE_SOLUTION = "sqlite3"
+    DATABASE_SOLUTION = "sqlite"
     DATABASE_URI = "sqlite:///"
     DATABASE_NAME = "app_flask"
     DATABASE_SCHEMA = ""

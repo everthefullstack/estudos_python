@@ -1,32 +1,13 @@
 from flask import Flask
-from app.configurations.database import SqliteBase, PostgresqlBase
+from app.models.peewee.base_model import db as peewee_db
+from app.models.sqlalchemy.base_model import db as sqlalchemy_db
 
 
-class Sqlite(SqliteBase):
-    def __init__(self, app: Flask) -> None:
-         super().__init__(app)
-    
-    def create_db_connection(self):
-        return f"{self._database_uri}{self._database_path}{self._database_name}.db"
-  
-class Postgresql(PostgresqlBase):
-    def __init__(self, app: Flask) -> None:
-         super().__init__(app)
+def init_app(app: Flask) -> None:
 
-    def create_db_connection(self):
-        return f"{self._database_uri}{self._database_name}{self._database_options}{self._database_schema}"
-    
-class Orm:
+    match app.config.ORM:
+        case "peewee":
+            peewee_db.init_app(app)
 
-    def __init__(self, app: Flask) -> None:
-        self.app = app
-        self._database_env = app.config.ENV
-
-    def process(self):
-        
-        match self._database_env:
-                case "production":
-                    return Postgresql(self.app).create_db_connection()
-
-                case "development":
-                    return Sqlite(self.app).create_db_connection()
+        case "sqlalchemy":
+            sqlalchemy_db.init_app(app)
