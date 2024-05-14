@@ -4,9 +4,8 @@ from sqlalchemy import Column, Integer, String
 
 class UsuarioModel(BaseModel):
     
-    __table_name__ = "tbusuario"
+    __tablename__ = "tbusuario"
 
     id = Column(Integer, primary_key=True)
     nome = Column(String, nullable=False)
     senha = Column(String, nullable=False)
-    
