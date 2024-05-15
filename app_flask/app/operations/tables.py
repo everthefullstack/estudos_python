@@ -7,44 +7,40 @@ from app.models.peewee.usuario_model import UsuarioModel as UsuarioPeewee
 class TablesPeewee:
     
     def __init__(self, orm: str) -> None:
-        self._orm = orm
+        self.__orm = orm
+        self.__create_tables()
 
     def __create_tables(self):
         try:
             lista_tables = [UsuarioPeewee,]
             peewee.database.create_tables(lista_tables)
 
-            print(f"Tabelas do orm {self._orm} criadas com sucesso.")
+            print(f"Tabelas do orm {self.__orm} criadas com sucesso.")
 
         except Exception as error:
             print(f"Erro ao criar tabela => {error}")
-                
-    def process(self):
-        self.__create_tables()
         
 class TablesSqlalchemy:
         
     def __init__(self, orm: str) -> None:
-        self._orm = orm
+        self.__orm = orm
+        self.__create_tables()
 
     def __create_tables(self):
         try:
             sqlalchemy.create_all()
 
-            print(f"Tabelas do orm {self._orm} criadas com sucesso.")
+            print(f"Tabelas do orm {self.__orm} criadas com sucesso.")
             
         except Exception as error:
             print(f"Erro ao criar tabela => {error}")
 
-    def process(self):
-        self.__create_tables()
-        
 def init_app(app: Flask):
     
     with app.app_context():
         match app.config.ORM:
             case "peewee":
-                TablesPeewee(app.config.ORM).process()
+                TablesPeewee(app.config.ORM)
             
             case "sqlalchemy":
-                TablesSqlalchemy(app.config.ORM).process()
+                TablesSqlalchemy(app.config.ORM)

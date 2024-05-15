@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-from typing import Union, List
 
 
 class IDataMapper(ABC):
@@ -17,23 +16,23 @@ class IModel(ABC):
 class IBase(ABC):
 
     @abstractmethod
-    def get(self, id: int) -> Union[List[dict], Exception]:
+    def get(self) -> None:
         pass
 
     @abstractmethod
-    def get_all(self) -> Union[List[dict], Exception]:
+    def get_all(self) -> None:
         pass
 
     @abstractmethod
-    def create(self, dataset: dict) -> Union[int, Exception]:
+    def create(self) -> None:
         pass
     
     @abstractmethod
-    def update(self, dataset: dict) -> Union[int, Exception]:
+    def update(self) -> None:
         pass
 
     @abstractmethod
-    def delete(self, id: int) -> Union[True, Exception]:
+    def delete(self) -> None:
         pass
 
 class IOrmDataMapper(IBase):

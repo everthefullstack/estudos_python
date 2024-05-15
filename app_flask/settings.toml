@@ -7,7 +7,7 @@
     CONFIGURATIONS = [
         "EXTENSIONS",
         "DB",
-        #"BLUEPRINTS_API"
+        "BLUEPRINTS_API"
     ]
     EXTENSIONS = [
         "app.configurations.extensions.cors",
@@ -17,7 +17,9 @@
         "app.configurations.database.uri",
         "app.configurations.database.orm",
     ]
-    #BLUEPRINTS_API = ["app.blueprints.api]
+    BLUEPRINTS_API = [
+        "app.blueprints.api.usuario",
+    ]
 
 [development]
     DATABASE_SOLUTION = "sqlite"

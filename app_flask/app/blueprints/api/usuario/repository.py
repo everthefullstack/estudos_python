@@ -6,13 +6,13 @@ class UsuarioRepository(IRepository):
     __slots__ = ("data_mapper",)
 
     def __init__(self, data_mapper: IOrmDataMapper) -> None:
-        self.data_mapper = data_mapper
+        self.__data_mapper = data_mapper
 
     def get(self, id: int):
-        return self.data_mapper.get(id)
+        return self.__data_mapper.get(id)
 
     def get_all(self):
-        return self.data_mapper.get_all()
+        return self.__data_mapper.get_all()
     
     def create(self):
         return False

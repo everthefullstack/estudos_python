@@ -11,7 +11,7 @@ class UsuarioService(IService):
     def get(self, dataset: dict):
         
         try:
-            res = self.__repository.get(dataset)
+            res = self.__repository.get(dataset["id"])
             return res
 
         except Exception as error:

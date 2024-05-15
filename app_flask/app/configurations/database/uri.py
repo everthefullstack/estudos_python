@@ -1,4 +1,4 @@
-from app.configurations.database.uri_factory import UriFactory
+from app.configurations.database.uris.uri_factory import UriFactory
 from flask import Flask
 
 
